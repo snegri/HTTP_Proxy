@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm webproxy
+ps -ef | grep webproxy | grep -v grep | awk '{print $2}' | xargs kill
+echo "Compiling..."
+g++ -std=c++11 webproxy.cpp
+mv a.out webproxy
+export http_proxy=127.0.0.1:8000
+./webproxy 8000&
